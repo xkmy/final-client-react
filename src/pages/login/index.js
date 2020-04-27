@@ -1,14 +1,18 @@
 import React from 'react'
 import { useLocation, Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { Form, Input, Button } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
+import { login } from '../../store/actions'
 import './index.scss'
 
 const Login = () => {
   const location = useLocation()
+  const dispatch = useDispatch()
   console.log(location)
   const onFinish = (values) => {
-    console.log(values)
+    const { username, password } = values
+    dispatch(login( username, password ))
   }
 
   return (

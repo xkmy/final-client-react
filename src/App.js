@@ -1,5 +1,7 @@
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import store from './store'
 import routes from './router'
 import renderRouter from './router/renderRouter'
 
@@ -8,7 +10,9 @@ function App() {
 
   return (
     <div style={{ height: '100%' }}>
-      <BrowserRouter>{renderRouter(routes, logined, '/login')}</BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>{renderRouter(routes, logined, '/login')}</BrowserRouter>
+      </Provider>
     </div>
   )
 }
