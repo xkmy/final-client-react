@@ -1,0 +1,16 @@
+@mixin flex($row: space-between, $col: center, $wrap: wrap) {
+  display: flex;
+  justify-content: $row;
+  align-items: $col;
+  flex-wrap: $wrap;
+}
+
+@mixin bg-img($url: '', $bg-size: 100% 100%, $bg-repeat: no-repeat) {
+  background-image: url($url);
+  background-size: $bg-size;
+  background-repeat: $bg-repeat;
+}
+@mixin a($color: #1890ff) {
+  color: $color;
+  cursor: pointer;
+}
