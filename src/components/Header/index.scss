@@ -15,6 +15,15 @@
     line-height: 54px;
     width: 960px;
     margin: 0 auto;
+    .menu-wrapper {
+      flex: 0.8;
+      .menu {
+        @include flex();
+        .menu-item {
+          color: rgba(0, 0, 0, 0.65);
+        }
+      }
+    }
     .logout {
       @include a();
     }

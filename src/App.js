@@ -1,18 +1,15 @@
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
-import { Provider } from 'react-redux'
-import store from './store'
+import { useSelector } from 'react-redux'
 import routes from './router'
 import renderRouter from './router/renderRouter'
 
 function App() {
-  const logined = true
+  const { logined } = useSelector(state => state.user)
 
   return (
     <div style={{ height: '100%' }}>
-      <Provider store={store}>
-        <BrowserRouter>{renderRouter(routes, logined, '/login')}</BrowserRouter>
-      </Provider>
+      <BrowserRouter>{renderRouter(routes, logined, '/login')}</BrowserRouter>
     </div>
   )
 }

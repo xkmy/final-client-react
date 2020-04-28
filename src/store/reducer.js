@@ -1,22 +1,23 @@
 import Cookies from 'js-cookie'
 import { HANDLE_LOGIN, HANDLE_LOGOUT } from './action-types'
 
+const user = Cookies.get('user')
+
 const defaultState = {
-  user: JSON.parse(Cookies.get('user')) || {}
+  user: user ? JSON.parse(user) : { username: '', logined: false },
 }
 
 export default (state = defaultState, action) => {
   switch (action.type) {
     case HANDLE_LOGIN:
-      console.log(action.value)
       return {
         ...state,
-        user: action.value
+        user: action.value,
       }
     case HANDLE_LOGOUT:
       return {
         ...state,
-        user: null
+        user: { username: '', logined: false },
       }
     default:
       return state
