@@ -10,7 +10,7 @@ const renderRoutes = (routes, logined, authPath = '/login', extraProps = {}, swi
           path={route.path}
           exact={route.exact}
           strict={route.strict}
-          render={(props) => {
+          render={props => {
             if (!route.requiresAuth || logined || route.path === authPath) {
               return <route.component {...props} {...extraProps} route={route} />
             }
