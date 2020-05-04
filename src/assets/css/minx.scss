@@ -4,6 +4,10 @@
   align-items: $col;
   flex-wrap: $wrap;
 }
+@mixin img($width: 100%, $height: 100%) {
+  width: $width;
+  height: $height;
+}
 
 @mixin bg-img($url: '', $bg-size: 100% 100%, $bg-repeat: no-repeat) {
   background-image: url($url);
@@ -13,4 +17,15 @@
 @mixin a($color: #1890ff) {
   color: $color;
   cursor: pointer;
+}
+
+@mixin container($width: 960px, $margin: 0 auto) {
+  width: $width;
+  margin: $margin;
+}
+
+@mixin hover-shadow($box-shadow: #ccc 0px 3px 3px) {
+  -webkit-box-shadow: $box-shadow;
+  -moz-box-shadow: $box-shadow;
+  box-shadow: $box-shadow;
 }

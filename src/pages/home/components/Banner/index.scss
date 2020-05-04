@@ -1,0 +1,35 @@
+@import '../../../../assets/css/minx.scss';
+@import '../../../../assets/css/variable.scss';
+
+.home-banner {
+  .item {
+    .img {
+      @include img();
+    }
+  }
+  .intro-tags {
+    @include flex();
+    @include container();
+    margin-top: 20px;
+    .tag {
+      margin: 0 5px;
+      display: inline-block;
+      width: 220px;
+      height: 40px;
+      text-align: center;
+      line-height: 40px;
+      color: #fff;
+      font-size: 26px;
+      border-radius: 25px;
+    }
+    .tag1 {
+      background: linear-gradient(to right, #0c9284, #0ccdba);
+    }
+    .tag2 {
+      background: linear-gradient(to right, #615370, #9780b3);
+    }
+    .tag3 {
+      background: linear-gradient(to right, #e006e2, #fd83e7);
+    }
+  }
+}

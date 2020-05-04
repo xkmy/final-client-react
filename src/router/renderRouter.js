@@ -6,7 +6,7 @@ const renderRoutes = (routes, logined, authPath = '/login', extraProps = {}, swi
     <Switch {...switchProps}>
       {routes.map((route, i) => (
         <Route
-          key={route.key || i}
+          key={route.path || i}
           path={route.path}
           exact={route.exact}
           strict={route.strict}

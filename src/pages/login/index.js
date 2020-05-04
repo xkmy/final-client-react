@@ -1,18 +1,21 @@
 import React from 'react'
-import { useLocation, Link } from 'react-router-dom'
+import { useLocation, useHistory, Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { Form, Input, Button } from 'antd'
+import { Form, Input, Button, message } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { login } from '../../store/actions'
 import './index.scss'
 
 const Login = () => {
   const location = useLocation()
+  const history = useHistory()
   const dispatch = useDispatch()
   console.log(location)
   const onFinish = (values) => {
     const { username, password } = values
-    dispatch(login( username, password ))
+    dispatch(login(username, password))
+    message.success('登录成功')
+    history.replace('/')
   }
 
   return (

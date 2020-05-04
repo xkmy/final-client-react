@@ -1,0 +1,116 @@
+@import '../../assets/css/minx.scss';
+@import '../../assets/css/variable.scss';
+
+.product-container {
+  .container {
+    @include container();
+    margin-top: 20px;
+    margin-bottom: 40px;
+    .product-main {
+      margin-top: 20px;
+      .product-intor {
+        @include flex($col: initial);
+        .left {
+          width: 350px;
+          height: 330px;
+          .img {
+            @include img();
+          }
+        }
+        .right {
+          .product {
+            .li {
+              margin-top: 35px;
+              .factory {
+                margin-left: 30px;
+              }
+              .count {
+                margin: 0 10px 0 30px;
+                .add,
+                .reduce,
+                .number {
+                  display: inline-block;
+                  width: 26px;
+                  height: 24px;
+                  border: 1px solid #d2d2d2;
+                  color: #d2d2d2;
+                  text-align: center;
+                  line-height: 20px;
+                  font-size: 18px;
+                  cursor: pointer;
+                }
+                .number {
+                  color: #000;
+                }
+              }
+              .stock {
+                margin-left: 10px;
+              }
+            }
+            .product-title {
+              font-weight: 600;
+            }
+            .price {
+              font-size: $price-font;
+              color: $price-color;
+              .span {
+                margin-left: 12px;
+              }
+            }
+            .item {
+              color: #999;
+              font-size: $primary-font;
+            }
+            .action {
+              display: inline-block;
+              width: 115px;
+              height: 36px;
+              font-size: 16px;
+              line-height: 36px;
+              text-align: center;
+              color: #fbfbfb;
+              margin-right: 20px;
+              cursor: pointer;
+            }
+            .pay-wrapper {
+              @include flex();
+              .pay {
+                @include flex();
+                flex: 0.9;
+                .pay-method {
+                  .pay-img {
+                    margin-right: 3px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .product-detail {
+        margin: 40px 0 80px 0;
+        .detail-title {
+          height: 36px;
+          line-height: 36px;
+          background: #f7f7f7;
+          border-bottom: 1px #f00000 solid;
+          .detail {
+            text-align: center;
+            line-height: 36px;
+            width: 140px;
+            height: 36px;
+            color: #fff;
+            background: #f00000;
+          }
+        }
+        .img {
+          @include img();
+        }
+      }
+    }
+    .back-to-top {
+      font-size: $title-font;
+      color: $primary-color;
+    }
+  }
+}

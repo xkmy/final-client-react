@@ -1,0 +1,15 @@
+@import '../../../../assets/css/minx.scss';
+
+.show-product-container {
+  .list {
+    @include flex();
+    .li {
+      width: 230px;
+      margin: 10px 5px;
+      .img {
+        @include img();
+        cursor: pointer;
+      }
+    }
+  }
+}

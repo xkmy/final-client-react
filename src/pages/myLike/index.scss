@@ -1,0 +1,45 @@
+@import '../../assets/css/minx.scss';
+@import '../../assets/css/variable.scss';
+
+.my-like-container {
+  .container {
+    @include container();
+    margin-top: 30px;
+    margin-bottom: 40px;
+    .like-list {
+      border: 1px solid #f0f0f0;
+      .action-item {
+        display: inline-block;
+        cursor: pointer;
+        width: 80px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        color: #fbfbfb;
+      }
+      .add-cart {
+        background-color: $price-color;
+      }
+      .buy {
+        background-color: $buy-color;
+      }
+      .cancel-like {
+        background-color: $primary-color;
+      }
+      .product-img {
+        width: 200px;
+        height: 200px;
+        .img {
+          @include img();
+        }
+      }
+      .price{
+        color: $price-color;
+        margin-top: 10px;
+      }
+    }
+    .back-to-top {
+      font-size: $title-font;
+    }
+  }
+}

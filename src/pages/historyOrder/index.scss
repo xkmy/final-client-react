@@ -1,0 +1,31 @@
+@import '../../assets/css/minx.scss';
+@import '../../assets/css/variable.scss';
+
+.history-order-container {
+  .container {
+    @include container();
+    margin-top: 30px;
+    margin-bottom: 40px;
+    .order-list {
+      border: 1px solid #f0f0f0;
+      .price-wrapper {
+        margin-top: 10px;
+        color: $price-color;
+      }
+      .action-item {
+        cursor: pointer;
+        color: $buy-color;
+      }
+      .product-img {
+        width: 200px;
+        height: 200px;
+        .img {
+          @include img();
+        }
+      }
+      .li {
+        padding: 10px;
+      }
+    }
+  }
+}

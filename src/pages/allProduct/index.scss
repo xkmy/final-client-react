@@ -1,0 +1,48 @@
+@import '../../assets/css/minx.scss';
+@import '../../assets/css/variable.scss';
+
+.all-product-container {
+  @include container();
+  margin-top: 20px;
+  margin-bottom: 30px;
+  .condition-wrapper {
+    .title {
+      @include flex();
+      font-size: $big-title-font;
+      margin-bottom: 25px;
+      .look-more {
+        cursor: pointer;
+      }
+    }
+    .type,
+    .price {
+      @include flex();
+      margin-bottom: 25px;
+      position: relative;
+      .type-title {
+        font-weight: 600;
+      }
+      .selected {
+        color: $primary-color;
+      }
+      .item {
+        cursor: pointer;
+      }
+      &::before {
+        content: ' ';
+        position: absolute;
+        height: 0.8px;
+        right: 0;
+        bottom: -13px;
+        left: 0;
+        background-color: #e5e5e6;
+      }
+    }
+  }
+  .back-to-top {
+    font-size: $title-font;
+    &:hover{
+      color: $primary-color;
+    }
+  }
+}

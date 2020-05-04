@@ -1,0 +1,31 @@
+@import '../../assets/css/minx.scss';
+@import '../../assets/css/variable.scss';
+
+.footer-container {
+  margin-top: 50px;
+  .footer {
+    @include flex();
+    border-bottom: 1px solid #ebebec;
+    border-top: 1px solid #ebebec;
+    padding: 20px 0;
+    .item {
+      .title {
+        font-size: $title-font;
+        color: #747474;
+        font-weight: 500;
+      }
+      .service {
+        margin-top: 10px;
+        font-size: $primary-font;
+        color: #999;
+      }
+      .link {
+        color: #999;
+      }
+    }
+  }
+  .reserved{
+    margin-top: 20px;
+    text-align: center;
+  }
+}

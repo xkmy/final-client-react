@@ -1,0 +1,27 @@
+@import '../../assets/css/minx.scss';
+@import '../../assets/css/variable.scss';
+
+.home-container {
+  .container {
+    @include container();
+    margin-top: 30px;
+    margin-bottom: 30px;
+    // background-color: #fff;
+    // padding: 20px;
+    .title {
+      @include flex();
+      margin: 20px 0;
+      .product {
+        font-size: $big-title-font;
+      }
+      .look-more {
+        font-size: $title-font;
+        cursor: pointer;
+        &:hover{
+          color: $primary-color;
+          transition: color .4s;
+        }
+      }
+    }
+  }
+}

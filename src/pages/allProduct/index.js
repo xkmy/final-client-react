@@ -1,14 +1,20 @@
 import React, { useState, useCallback } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+import { BackTop } from 'antd'
 import Header from '../../components/Header'
 import Product from '../../components/Product'
-import Banner from './components/Banner'
-import ShowProduct from './components/ShowProduct'
+import Footer from '../../components/Footer'
+import { MUSICAL_INSTRUMENT_TYPE, INSTRUMENT_PRICE_TYPE } from '../../constants'
 import './index.scss'
 
 const Home = () => {
-  const { push } = useHistory()
-  const [productList, setProductList] = useState([
+  const { state } = useLocation()
+  let category = ''
+  state ? (category = state.category) : (category = '')
+  const [selectedMusicInstrumentType, setSelectedMusicInstrumentType] = useState(category || 'all')
+  const [selectedPrice, setSelectedPrice] = useState('价格不限')
+
+  const [productList] = useState([
     {
       id: 1,
       intro: '敦煌古筝初学者入门考级成人694KK蕉窗夜语/蕉窗图案',
@@ -65,25 +71,51 @@ const Home = () => {
     }
   ])
 
-  const handleLookMore = useCallback(() => {
-    push('/all-product')
-  }, [push])
+  const handleTypeClick = useCallback(type => {
+    setSelectedMusicInstrumentType(type)
+  }, [])
+
+  const handlePriceClick = useCallback(type => {
+    setSelectedPrice(type)
+  }, [])
 
   return (
-    <div className='home-container'>
+    <>
       <Header />
-      <Banner />
-      <div className='container'>
-        <ShowProduct />
-        <div className='title'>
-          <span className='product'>产品</span>
-          <span onClick={handleLookMore} className='look-more'>
-            查看更多
-          </span>
+      <div className='all-product-container'>
+        <div className='condition-wrapper'>
+          <div className='type'>
+            <div className='type-title'>分类</div>
+            {MUSICAL_INSTRUMENT_TYPE.map(item => (
+              <span
+                onClick={() => handleTypeClick(item.type)}
+                key={item.id}
+                className={`item ${item.type === selectedMusicInstrumentType ? 'selected' : ''}`}
+              >
+                {item.name}
+              </span>
+            ))}
+          </div>
+          <div className='price'>
+            <div className='type-title'>价格</div>
+            {INSTRUMENT_PRICE_TYPE.map(item => (
+              <span
+                onClick={() => handlePriceClick(item.value)}
+                key={item.id}
+                className={`item ${item.value === selectedPrice ? 'selected' : ''}`}
+              >
+                {item.value}
+              </span>
+            ))}
+          </div>
         </div>
         <Product list={productList} />
+        <Footer />
+        <BackTop className='back-to-top'>
+          top
+        </BackTop>
       </div>
-    </div>
+    </>
   )
 }
 

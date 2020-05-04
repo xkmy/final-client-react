@@ -1,11 +1,11 @@
 @import '../../assets/css/minx.scss';
+@import '../../assets/css/variable.scss';
 
 .header-wrapper {
   z-index: 100;
   border-top: none;
   font-size: 18px;
   min-width: 960px;
-  margin-bottom: 15px;
   background-color: #fff;
   box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08),
     0 9px 28px 8px rgba(0, 0, 0, 0.05);
@@ -15,8 +15,22 @@
     line-height: 54px;
     width: 960px;
     margin: 0 auto;
+    .menu {
+      @include flex();
+      flex: 0.8;
+      .menu-item {
+        cursor: pointer;
+        color: rgba(0, 0, 0, 0.65);
+      }
+      .selected {
+        color: $primary-color;
+      }
+    }
     .logout {
       @include a();
+    }
+    .welcome {
+      margin-right: 8px;
     }
   }
 }

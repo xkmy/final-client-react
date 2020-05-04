@@ -1,8 +1,9 @@
 import Cookies from 'js-cookie'
 import { HANDLE_LOGIN, HANDLE_LOGOUT } from './action-types'
 
+const user = Cookies.get('user')
 const defaultState = {
-  user: JSON.parse(Cookies.get('user')) || {}
+  user: user ? JSON.parse(user) : {}
 }
 
 export default (state = defaultState, action) => {
@@ -16,7 +17,7 @@ export default (state = defaultState, action) => {
     case HANDLE_LOGOUT:
       return {
         ...state,
-        user: null
+        user: {}
       }
     default:
       return state

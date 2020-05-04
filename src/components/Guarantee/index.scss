@@ -1,0 +1,38 @@
+@import '../../assets/css/minx.scss';
+
+.guarantee-container {
+  .guarantee-list {
+    @include flex();
+    .guarantee-li {
+      @include flex();  
+      .left {
+        display: inline-block;
+        border: 2px solid #ff4d64;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        line-height: 45px;
+        vertical-align: middle;
+        text-align: center;
+        .name {
+          font-size: 26px;
+          font-weight: 700;
+          font-family: 'Î¢ÈíÑÅºÚ';
+          color: #ff4d64;
+        }
+      }
+      .right{
+        margin-left: 10px;
+        .top{
+          margin-bottom: 5px;
+          font-size: 18px;
+          color: #333;
+        }
+        .bottom{
+          font-size: 14px;
+          color: #999;
+        }
+      }
+    }
+  }
+}

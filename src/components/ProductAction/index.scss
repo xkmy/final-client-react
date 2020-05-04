@@ -1,0 +1,28 @@
+@import '../../assets/css/minx.scss';
+@import '../../assets/css/variable.scss';
+
+.action-wrapper {
+  color: #fff;
+  font-size: $primary-font;
+  .action-item {
+    padding: 6px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  .buy {
+    background: $buy-color;
+  }
+  .add-cart {
+    background-color: $price-color;
+  }
+  .add-like {
+    cursor: pointer;
+    color: #999;
+    .like{
+      margin-left: 6px;
+    }
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}

@@ -1,0 +1,109 @@
+@import '../../assets/css/minx.scss';
+@import '../../assets/css/variable.scss';
+
+.cart-container {
+  @include container();
+  margin-top: 30px;
+  .title {
+    @include flex();
+  }
+  .container {
+    .order-title {
+      @include flex();
+      margin-top: 20px;
+    }
+    .order-content {
+      .order-list {
+        .product {
+          @include flex($wrap: nowrap);
+          margin-top: 20px;
+          .check {
+            flex: 1.7;
+          }
+          .name {
+            flex: 1.9;
+            font-size: 18px;
+            color: #333333;
+            display: flex;
+            align-items: center;
+          }
+          .one-price {
+            flex: 1.4;
+          }
+          .number {
+            flex: 2;
+            .number-container {
+              display: flex;
+              justify-content: space-between;
+              padding: 0 6px;
+              width: 150px;
+              height: 40px;
+              line-height: 40px;
+              border: 1px solid #e5e5e5;
+              font-size: $title-font;
+              .add {
+                cursor: pointer;
+              }
+              .decrease {
+                cursor: pointer;
+              }
+            }
+          }
+          .price {
+            flex: 1;
+            color: $price-color;
+          }
+          .delete-wrapper {
+            flex: 1;
+            text-align: right;
+            .delete {
+              cursor: pointer;
+              &:hover {
+                color: $buy-color;
+              }
+            }
+          }
+        }
+      }
+      .order-price {
+        @include flex();
+        margin-top: 30px;
+        .left {
+          .product-count {
+            color: $price-color;
+          }
+          .total {
+            margin-right: 20px;
+          }
+        }
+        .right {
+          .total {
+            color: $price-color;
+            margin-right: 20px;
+            .total-price {
+              font-size: $title-font;
+            }
+          }
+          .settle-accounts {
+            cursor: pointer;
+            display: inline-block;
+            background-color: $price-color;
+            color: #fff;
+            width: 200px;
+            height: 48px;
+            line-height: 48px;
+            font-size: 18px;
+            text-align: center;
+          }
+          .disabled {
+            background-color: #d7d7d7;
+            cursor: default;
+          }
+        }
+      }
+    }
+    .empty-wrapper {
+      margin-top: 20px;
+    }
+  }
+}

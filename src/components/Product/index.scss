@@ -1,0 +1,43 @@
+@import '../../assets/css/minx.scss';
+@import '../../assets/css/variable.scss';
+
+.product-container {
+  .list {
+    @include flex();
+    .item {
+      width: 275px;
+      list-style: none;
+      margin: 0;
+      border: 1px solid #e6e6e6;
+      padding-bottom: 30px;
+      margin-bottom: 15px;
+      transition-duration: 0.5s;
+      &:hover {
+        @include hover-shadow();
+      }
+      .product-img {
+        width: 275px;
+        height: 275px;
+        .img {
+          @include img();
+          cursor: pointer;
+        }
+      }
+      .intro {
+        padding: 5px 5px 0 5px;
+        text-align: center;
+        .price-intro {
+          font-size: $price-font;
+          color: $price-color;
+          margin: 6px 0;
+        }
+        .intro-title {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
+}
