@@ -13,23 +13,23 @@ const OrderProduct = () => {
       </div>
       <ul className='description'>
         <li className='li'>
-          商品件数:<span className='item'>1件</span>
+          Number of products:<span className='item'>1件</span>
         </li>
         <li className='li'>
-          商品总价:<span className='item'>1399元</span>
+          Commodity price:<span className='item'>1399元</span>
         </li>
         <li className='li'>
-          运费:<span className='item'>0元</span>
+          Freight:<span className='item'>0元</span>
         </li>
         <li className='li'>
-          应付总额:<span className='item total-price'>1399元</span>
+          Total payable:<span className='item total-price'>1399元</span>
         </li>
         <li className='li settle-accounts'>
           <Link to='/cart' className='action-btn back-cart-btn'>
-            返回购物车
+            Return to shopping cart
           </Link>
           <Link to='/order-pay' className='action-btn settle-accounts-btn'>
-            去结算
+            To settle
           </Link>
         </li>
       </ul>
