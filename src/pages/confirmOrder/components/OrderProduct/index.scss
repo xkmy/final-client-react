@@ -1,0 +1,57 @@
+@import '../../../../assets/css/minx.scss';
+@import '../../../../assets/css/variable.scss';
+
+.order-product-container {
+  .title {
+    font-size: $title-font;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ebebec;
+  }
+  .product {
+    @include flex();
+    .price,
+    .total {
+      color: $price-color;
+    }
+  }
+  .description {
+    text-align: right;
+    margin-top: 40px;
+    .li {
+      margin-top: 10px;
+      .item {
+        display: inline-block;
+        width: 100px;
+        color: $price-color;
+      }
+      .total-price {
+        font-size: $price-font;
+      }
+    }
+    .settle-accounts {
+      border-top: 1px solid #ebebec;
+      padding-top: 30px;
+      margin-top: 30px;
+      .action-btn {
+        display: inline-block;
+        width: 150px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        font-size: $title-font;
+      }
+      .settle-accounts-btn {
+        background-color: $price-color;
+      }
+      .back-cart-btn {
+        background-color: #b0b0b0;
+        margin-right: 20px;
+      }
+    }
+  }
+}

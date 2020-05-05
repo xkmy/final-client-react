@@ -16,7 +16,7 @@ const ProductAction = props => {
       if (username) {
         switch (type) {
           case 'buy':
-            message.success('购买成功')
+            push('/confirm-order')
             break
           case 'cart':
             message.success('加入购物车')

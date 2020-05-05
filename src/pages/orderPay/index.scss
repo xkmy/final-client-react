@@ -1,0 +1,13 @@
+@import '../../assets/css/minx.scss';
+@import '../../assets/css/variable.scss';
+
+.order-pay-container {
+  height: 100%;
+  background-color: rgb(245, 245, 245);
+  .container {
+    @include container();
+    .result {
+      margin-top: 30px;
+    }
+  }
+}

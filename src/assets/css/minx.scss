@@ -9,10 +9,11 @@
   height: $height;
 }
 
-@mixin bg-img($url: '', $bg-size: 100% 100%, $bg-repeat: no-repeat) {
+@mixin bg-img($url: '', $bg-size: 100% 100%, $bg-repeat: no-repeat, $bg-position: center) {
   background-image: url($url);
   background-size: $bg-size;
   background-repeat: $bg-repeat;
+  background-position: $bg-position;
 }
 @mixin a($color: #1890ff) {
   color: $color;

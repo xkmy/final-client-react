@@ -1,11 +1,23 @@
-import React from 'react'
-import { Checkbox, Empty } from 'antd'
+import React, { useCallback } from 'react'
+import { Link } from 'react-router-dom'
+import { Checkbox, Empty, Modal, message } from 'antd'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import './index.scss'
 
 const Cart = () => {
   const cart = [{ id: 1, checked: true, name: '吉他', price: 1000, count: 1 }]
+
+  const handleDelete = useCallback(() => {
+    Modal.confirm({
+      title: '您确定要删除该商品吗?',
+      okText: '确定',
+      cancelText: '取消',
+      onOk: () => {
+        message.success('删除成功')
+      }
+    })
+  }, [])
 
   return (
     <>
@@ -39,7 +51,9 @@ const Cart = () => {
                     </span>
                     <span className='price'>{item.price * item.count}元</span>
                     <span className='delete-wrapper'>
-                      <span className='delete'>删除</span>
+                      <span onClick={handleDelete} className='delete'>
+                        删除
+                      </span>
                     </span>
                   </li>
                 ))}
@@ -55,6 +69,9 @@ const Cart = () => {
                   <span className='total'>
                     合计:<span className='total-price'>1000</span>元
                   </span>
+                  <Link to='confirm-order' className='settle-accounts'>
+                    去结算
+                  </Link>
                 </div>
               </div>
             </div>

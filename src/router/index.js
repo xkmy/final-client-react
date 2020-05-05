@@ -6,6 +6,8 @@ import ProductDetail from '../pages/productDetail'
 import Cart from '../pages/cart'
 import HistoryOrder from '../pages/historyOrder'
 import MyLike from '../pages/myLike'
+import ConfirmOrder from '../pages/confirmOrder'
+import OrderPay from '../pages/orderPay'
 import NotFound from '../pages/notFound'
 
 const routes = [
@@ -49,6 +51,16 @@ const routes = [
   {
     path: '/my-like',
     component: MyLike,
+    requiresAuth: true
+  },
+  {
+    path: '/confirm-order',
+    component: ConfirmOrder,
+    requiresAuth: true
+  },
+  {
+    path: '/order-pay',
+    component: OrderPay,
     requiresAuth: true
   },
   {
