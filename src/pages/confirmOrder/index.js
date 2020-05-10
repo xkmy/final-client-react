@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react'
+import { useLocation } from 'react-router-dom'
 import OrderHeader from '../../components/OrderHeader'
 import AddAddressForm from './components/AddressForm'
 import OrderProduct from './components/OrderProduct'
@@ -6,8 +7,10 @@ import Footer from '../../components/Footer'
 import './index.scss'
 
 const ConfirmOrder = () => {
-  const [selected, setSelected] = useState(1)
-  const [addressList, setAddress] = useState([
+  const { state } = useLocation()
+
+  const [selected ] = useState(1)
+  const [addressList ] = useState([
     {
       id: 1,
       username: 'xkmy',
@@ -55,7 +58,7 @@ const ConfirmOrder = () => {
             <AddAddressForm visible={isShowAddModal} submit={submit} onCancel={onCancel} />
           </div>
         </div>
-        <OrderProduct />
+        <OrderProduct productList={state.params.pro_list}/>
         <Footer />
       </div>
     </div>

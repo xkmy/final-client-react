@@ -1,11 +1,22 @@
-import React, { useCallback } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import { List, Modal, message } from 'antd'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import { BASE_IMG_URL } from '../../constants'
+import request from '../../api/request'
 import './index.scss'
 
 const HistoryOrder = () => {
+  useEffect(() => {
+    ;(async () => {
+      const result = await request('/order')
+      const { status, data } = result
+      if(status===0){
+        console.log(data)
+      }
+    })()
+  }, [])
+
   const listData = []
   for (let i = 0; i < 5; i++) {
     listData.push({
@@ -13,9 +24,7 @@ const HistoryOrder = () => {
       description: (
         <div>
           <div>订单日期: 2020-4-20</div>
-          <div className='price-wrapper'>
-            订单金额: ¥5500
-          </div>
+          <div className='price-wrapper'>订单金额: ¥5500</div>
         </div>
       ),
       content: '欧米勒T1系列立式钢琴儿童家庭学校演奏初学专业钢琴'

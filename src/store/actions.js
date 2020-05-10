@@ -12,7 +12,6 @@ const handleLogout = () => ({
 
 export const login = username => {
   return async dispatch => {
-    Cookies.set('user', { username, logined: true }, { expires: 30 })
     dispatch(handleLogin({ username, logined: true }))
   }
 }

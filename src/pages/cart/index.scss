@@ -58,6 +58,7 @@
             text-align: right;
             .delete {
               cursor: pointer;
+              color: $buy-color;
               &:hover {
                 color: $buy-color;
               }
@@ -102,7 +103,8 @@
       }
     }
     .empty-wrapper {
-      margin-top: 20px;
+      margin-top: 50px;
+      text-align: center;
     }
   }
 }

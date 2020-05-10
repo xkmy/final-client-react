@@ -27,6 +27,7 @@
         padding: 5px 5px 0 5px;
         text-align: center;
         .price-intro {
+          cursor: pointer;
           font-size: $price-font;
           color: $price-color;
           margin: 6px 0;

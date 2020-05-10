@@ -1,15 +1,20 @@
-import React, { memo } from 'react'
-import { Link } from 'react-router-dom'
-import { Breadcrumb, BackTop } from 'antd'
+import React, { memo, useEffect, useCallback, useState } from 'react'
+import { useParams, Link } from 'react-router-dom'
+import { Breadcrumb, BackTop, Modal, message } from 'antd'
 import Header from '../../components/Header'
 import ProductAction from '../../components/ProductAction'
 import Guarantee from '../../components/Guarantee'
 import Footer from '../../components/Footer'
+import request from '../../api/request'
 import { BASE_IMG_URL } from '../../constants'
 import '../../assets/iconfont/iconfont.css'
 import './index.scss'
 
 const ProductDetail = () => {
+  const { id } = useParams()
+  const [productDetail, setProductDetail] = useState({})
+  const [productNumber, setProductNumber] = useState(1)
+
   const detailImgs = [
     {
       id: 1,
@@ -60,6 +65,26 @@ const ProductDetail = () => {
     }
   ]
 
+  useEffect(() => {
+    ;(async () => {
+      const result = await request('/product/' + id)
+      console.log(result)
+      const { status, data } = result
+      if (status === 0) {
+        setProductDetail(data.product)
+      }
+    })()
+  }, [id])
+
+  const handleAddToCart = useCallback(async => {
+    setProductNumber(productNumber => productNumber + 1)
+    // const result = await request('/cart', { product_id: id }, 'POST')
+    // const { status } = result
+    // if (status === 0) {
+    //   setProductNumber(productNumber => productNumber + 1)
+    // }
+  }, [])
+
   return (
     <div className='product-container'>
       <Header />
@@ -87,7 +112,7 @@ const ProductDetail = () => {
                   DOVE DD220S FG复古色 和平鸽 鸽子吉他初学者学生女男单板民谣
                 </li>
                 <li className='li price'>
-                  价格:<span className='span'>¥5000</span>
+                  价格:<span className='span'>${productDetail.product_price}</span>
                 </li>
                 <li className='li item'>
                   服务:
@@ -97,23 +122,25 @@ const ProductDetail = () => {
                   <span>数量:</span>
                   <span className='count'>
                     <span className='reduce'>-</span>
-                    <span className='number'>1</span>
-                    <span className='add'>+</span>
+                    <span className='number'>{productNumber}</span>
+                    <span onClick={handleAddToCart} className='add'>
+                      +
+                    </span>
                   </span>
-                  件<span className='stock'>库存 8 件</span>
+                  件{/* <span className='stock'>库存 8 件</span> */}
                 </li>
                 <li className='li'>
-                  <ProductAction className='action' />
+                  <ProductAction
+                    id={productDetail.product_id}
+                    productNumber={productNumber}
+                    className='action'
+                  />
                 </li>
                 <li className='li pay-wrapper'>
                   <span>支付方式:</span>
                   <div className='pay'>
                     <span className='pay-method'>
-                      <img
-                        className='pay-img'
-                        src={BASE_IMG_URL + '/images/_r2_c2.jpg'}
-                        alt='支付宝'
-                      />
+                      <img className='pay-img' src={productDetail.product_image} alt='支付宝' />
                       支付宝
                     </span>
                     <span className='pay-method'>

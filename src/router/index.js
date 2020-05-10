@@ -15,7 +15,7 @@ const routes = [
     path: '/',
     exact: true,
     component: Home,
-    requiresAuth: false
+    requiresAuth: true
   },
   {
     path: '/login',

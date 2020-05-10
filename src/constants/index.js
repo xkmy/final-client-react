@@ -1,4 +1,4 @@
-export const BASE_URL = 'XXX'
+export const BASE_URL = 'http://47.103.11.131/final-server'
 export const BASE_IMG_URL = 'http://www.musicdo.cn'
 
 export const MUSICAL_INSTRUMENT_TYPE = [
@@ -52,7 +52,7 @@ export const MUSICAL_INSTRUMENT_TYPE = [
 export const INSTRUMENT_PRICE_TYPE = [
   {
     id: 1,
-    value: '价格不限'
+    value: '价格不限',
   },
   {
     id: 2,

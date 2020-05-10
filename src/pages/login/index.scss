@@ -1,24 +1,33 @@
 @import '../../assets/css/minx.scss';
+@import '../../assets/css/variable.scss';
 
-.login-wrapper {
-  @include flex();
-  @include bg-img('https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg');
+.register-container {
   height: 100%;
-  .login-form {
-    max-width: 350px;
-    width: 320px;
-    margin: 0 auto;
-    padding: 40px 30px 8px 30px;
-    background-color: #fff;
-    .login-form-span {
-      @include a();
-    }
-    .login-form-button {
-      width: 100%;
-    }
-    .register {
-      display: inline-block;
-      margin-top: 15px;
+  .title {
+    text-align: center;
+    font-size: $big-title-font;
+  }
+  .login-wrapper {
+    @include flex();
+    @include bg-img('https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg');
+    height: 100%;
+    .login-form {
+      background-color: #fff;
+      border: 1px solid #ebebec;
+      max-width: 360px;
+      width: 360px;
+      margin: 0 auto;
+      padding: 10px 30px 8px 30px;
+      .login-form-span {
+        @include a();
+      }
+      .login-form-button {
+        width: 100%;
+      }
+      .register {
+        display: inline-block;
+        margin-top: 15px;
+      }
     }
   }
 }

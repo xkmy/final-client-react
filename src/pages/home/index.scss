@@ -17,11 +17,15 @@
       .look-more {
         font-size: $title-font;
         cursor: pointer;
-        &:hover{
+        &:hover {
           color: $primary-color;
-          transition: color .4s;
+          transition: color 0.4s;
         }
       }
+    }
+    .loading-wrapper {
+      @include flex($row: center);
+      // margin: 0 auto;
     }
   }
 }

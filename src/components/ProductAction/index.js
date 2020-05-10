@@ -2,27 +2,43 @@ import React, { memo, useCallback } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Modal, message } from 'antd'
+import request from '../../api/request'
 import '../../assets/iconfont/iconfont.css'
 import './index.scss'
 
 const ProductAction = props => {
-  const { className } = props
+  const { className, id } = props
   const { push } = useHistory()
   const { pathname } = useLocation()
   const { username } = useSelector(state => state.user)
 
   const handleAdd = useCallback(
-    type => {
+    async type => {
       if (username) {
         switch (type) {
           case 'buy':
-            push('/confirm-order')
+            // push('/confirm-order')
+            push('/cart')
             break
           case 'cart':
-            message.success('加入购物车')
+            const cartResult = await request('/cart', { product_id: id }, 'POST')
+            const { status: cartStatus } = cartResult
+            if (cartStatus === 0) {
+              Modal.success({
+                title: 'add to Cart successful!',
+                okText: 'go check',
+                onOk: () => {
+                  push('/cart')
+                }
+              })
+            }
             break
           case 'like':
-            message.success('收藏成功')
+            const result = await request('/like', { product_id: id }, 'POST')
+            const { status } = result
+            if (status === 0) {
+              message.success('collection success')
+            }
             break
           default:
             break
@@ -37,7 +53,7 @@ const ProductAction = props => {
         }
       })
     },
-    [pathname, push, username]
+    [id, pathname, push, username]
   )
 
   return (

@@ -1,23 +1,111 @@
-import React, { useCallback } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useCallback, useEffect, useState  } from 'react'
+import { useHistory, Link } from 'react-router-dom'
 import { Checkbox, Empty, Modal, message } from 'antd'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
+import request from '../../api/request'
 import './index.scss'
 
 const Cart = () => {
-  const cart = [{ id: 1, checked: true, name: '吉他', price: 1000, count: 1 }]
+  const { push } = useHistory()
+  const [cart, setCart] = useState([])
 
-  const handleDelete = useCallback(() => {
+  useEffect(() => {
+    ;(async () => {
+      const result = await request('/cart')
+      const { status, data } = result
+      if (status === 0) {
+        const { cart } = data
+        const newCart = cart.map(item => {
+          item.checked = true
+          return item
+        })
+        setCart(newCart)
+      }
+    })()
+  }, [])
+
+  const handleDelete = useCallback(id => {
     Modal.confirm({
-      title: '您确定要删除该商品吗?',
-      okText: '确定',
-      cancelText: '取消',
-      onOk: () => {
-        message.success('删除成功')
+      title: 'Are you sure you want to delete this product?',
+      onOk: async () => {
+        const result = await request('/cart/' + id, null, 'DELETE')
+        const { status } = result
+        if (status === 0) {
+          message.success('删除成功')
+        }
       }
     })
   }, [])
+
+  const computeSum = (cart, type) => {
+    const sum = cart.reduce((pre, cur) => {
+      if (cur.checked) {
+        if (type === 'price') {
+          return pre + cur.product_price * cur.product_num
+        }
+        return pre + cur.product_num
+      }
+      return pre
+    }, 0)
+    return sum
+  }
+
+  const handleAddOrReduceCount = async (type, id) => {
+    const result = await request(
+      '/cart/' + id,
+      { change_type: type === 'add' ? 'add' : 'minus' },
+      'PUT'
+    )
+    const { status } = result
+    if (status === 0) {
+      const newCart = JSON.parse(JSON.stringify(cart))
+      newCart.map(item => {
+        if (item.cart_id === id) {
+          type === 'add' ? item.product_num++ : item.product_num--
+        }
+        return item
+      })
+      setCart(newCart)
+    }
+  }
+
+  const handleChecked = useCallback(
+    (e, id) => {
+      const newCart = JSON.parse(JSON.stringify(cart))
+      newCart.map(item => {
+        if (item.cart_id === id) {
+          item.checked = e.target.checked
+        }
+        return item
+      })
+      setCart(newCart)
+    },
+    [cart]
+  )
+
+  const handleToSettle = useCallback(async () => {
+    let params = {}
+    const checkedProducts = []
+    const newCart = JSON.parse(JSON.stringify(cart))
+    newCart.map(item => {
+      if (item.checked) {
+        let obj = {}
+        obj.product_id = item.product_id
+        obj.cart_id = item.cart_id
+        obj.product_num = item.product_num
+        checkedProducts.push(obj)
+      }
+    })
+    params.pro_list = checkedProducts
+    params.total_price = computeSum(cart, 'price')
+    const payResult = await request('/order', params, 'POST')
+    const { status } = payResult
+    if (status === 0) {
+      message.success('结算成功')
+    }
+    // push('/confirm-order', { params })
+  }, [cart])
 
   return (
     <>
@@ -36,23 +124,36 @@ const Cart = () => {
             <div className='order-content'>
               <ul className='order-list'>
                 {cart.map(item => (
-                  <li key={item.id} className='product'>
+                  <li key={item.cart_id} className='product'>
                     <span className='check'>
-                      <Checkbox defaultChecked={item.checked} />
+                      <Checkbox
+                        onChange={e => handleChecked(e, item.cart_id)}
+                        defaultChecked={item.checked}
+                      />
                     </span>
-                    <span className='name'>{item.name}</span>
-                    <span className='one-price'>{item.price}元</span>
+                    <span className='name'>{item.product_name}</span>
+                    <span className='one-price price'>${item.product_price}</span>
                     <span className='number'>
                       <div className='number-container'>
-                        <span className='add'>-</span>
-                        <span className='count'>{item.count}</span>
-                        <span className='decrease'>+</span>
+                        <span
+                          onClick={() => handleAddOrReduceCount('minus', item.cart_id)}
+                          className='add'
+                        >
+                          -
+                        </span>
+                        <span className='count'>{item.product_num}</span>
+                        <span
+                          onClick={() => handleAddOrReduceCount('add', item.cart_id)}
+                          className='decrease'
+                        >
+                          +
+                        </span>
                       </div>
                     </span>
-                    <span className='price'>{item.price * item.count}元</span>
+                    <span className='price'>{item.product_price * item.product_num}元</span>
                     <span className='delete-wrapper'>
-                      <span onClick={handleDelete} className='delete'>
-                        删除
+                      <span onClick={() => handleDelete(item.cart_id)} className='delete'>
+                        delete
                       </span>
                     </span>
                   </li>
@@ -60,24 +161,27 @@ const Cart = () => {
               </ul>
               <div className='order-price'>
                 <div className='left'>
-                  <span className='total'>共1 件商品</span>
+                  <span className='total'>{computeSum(cart)} products</span>
                   <span className='selected'>
-                    已选择<span className='product-count'>1</span>件
+                    chosen<span className='product-count'>{computeSum(cart)}</span>件
                   </span>
                 </div>
                 <div className='right'>
                   <span className='total'>
-                    合计:<span className='total-price'>1000</span>元
+                    total:<span className='total-price'>{computeSum(cart, 'price')}</span>元
                   </span>
-                  <Link to='confirm-order' className='settle-accounts'>
-                    去结算
-                  </Link>
+                  <span onClick={handleToSettle} to='confirm-order' className='settle-accounts'>
+                    To settle
+                  </span>
                 </div>
               </div>
             </div>
           ) : (
             <div className='empty-wrapper'>
-              <Empty />
+              {/* <Empty /> */}
+              <div >
+                您还没有添加商品,<Link to='/'>去添加</Link>
+              </div>
             </div>
           )}
         </div>
