@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState  } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useHistory, Link } from 'react-router-dom'
 import { Checkbox, Empty, Modal, message } from 'antd'
 import Header from '../../components/Header'
@@ -10,20 +10,22 @@ const Cart = () => {
   const { push } = useHistory()
   const [cart, setCart] = useState([])
 
-  useEffect(() => {
-    ;(async () => {
-      const result = await request('/cart')
-      const { status, data } = result
-      if (status === 0) {
-        const { cart } = data
-        const newCart = cart.map(item => {
-          item.checked = true
-          return item
-        })
-        setCart(newCart)
-      }
-    })()
+  const getCart = useCallback(async () => {
+    const result = await request('/cart')
+    const { status, data } = result
+    if (status === 0) {
+      const { cart } = data
+      const newCart = cart.map(item => {
+        item.checked = true
+        return item
+      })
+      setCart(newCart)
+    }
   }, [])
+
+  useEffect(() => {
+    getCart()
+  }, [getCart])
 
   const handleDelete = useCallback(id => {
     Modal.confirm({
@@ -102,10 +104,11 @@ const Cart = () => {
     const payResult = await request('/order', params, 'POST')
     const { status } = payResult
     if (status === 0) {
+      getCart()
       message.success('结算成功')
     }
     // push('/confirm-order', { params })
-  }, [cart])
+  }, [cart, getCart])
 
   return (
     <>
@@ -179,7 +182,7 @@ const Cart = () => {
           ) : (
             <div className='empty-wrapper'>
               {/* <Empty /> */}
-              <div >
+              <div>
                 您还没有添加商品,<Link to='/'>去添加</Link>
               </div>
             </div>
