@@ -32,11 +32,11 @@ const Login = () => {
         const decodedToken = jwtDecode(token)
         if (decodedToken) {
           const userInfo = JSON.parse(decodedToken.sub)
-          const { buyer_id } = userInfo
+          const {  username } = userInfo
           console.log(userInfo)
           Cookies.set('token', token, { expires: 7 })
-          Cookies.set('user', { username: buyer_id, logined: true }, { expires: 7 })
-          dispatch(login(buyer_id))
+          Cookies.set('user', { username, logined: true }, { expires: 7 })
+          dispatch(login(username))
           message.success('登录成功')
           history.replace(pathname)
         }
