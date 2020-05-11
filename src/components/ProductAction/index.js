@@ -7,7 +7,7 @@ import '../../assets/iconfont/iconfont.css'
 import './index.scss'
 
 const ProductAction = props => {
-  const { className, id } = props
+  const { className, id, showLike = true } = props
   const { push } = useHistory()
   const { pathname } = useLocation()
   const { username } = useSelector(state => state.user)
@@ -70,10 +70,12 @@ const ProductAction = props => {
       >
         加入购物车
       </span>
-      <span onClick={() => handleAdd('like')} className='add-like'>
-        <i className='iconfont icon-shoucang' />
-        <span className='like'>加入收藏</span>
-      </span>
+      {showLike ? (
+        <span onClick={() => handleAdd('like')} className='add-like'>
+          <i className='iconfont icon-shoucang' />
+          <span className='like'>加入收藏</span>
+        </span>
+      ) : null}
     </div>
   )
 }

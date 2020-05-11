@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useLocation } from 'react-router-dom'
+import { Empty } from 'antd'
 import { BackTop } from 'antd'
 import Header from '../../components/Header'
 import Product from '../../components/Product'
@@ -13,41 +14,44 @@ const Home = () => {
   let category = ''
   state ? (category = state.category) : (category = '')
   const [selectedMusicInstrumentType, setSelectedMusicInstrumentType] = useState(category || 'all')
-  const [selectedPrice, setSelectedPrice] = useState('价格不限')
+  const [selectedPrice, setSelectedPrice] = useState([0, 1000000000])
+  const [priceFlag, setPriceFlag] = useState('价格不限')
   const [productList, setProductList] = useState([])
 
-  useEffect(() => {
-    ;(async () => {
-      const result = await request('/product')
-      const { status, data } = result
-      if (status === 0) {
-        setProductList(data.products)
-      }
-    })()
+  const getAllProduct = useCallback(async () => {
+    const result = await request('/product')
+    const { status, data } = result
+    if (status === 0) {
+      setProductList(data.products)
+    }
   }, [])
 
   useEffect(() => {
-    if (selectedMusicInstrumentType !== 'all' && setSelectedPrice !== '价格不限') {
+    console.log(selectedMusicInstrumentType, selectedPrice)
+    if (selectedMusicInstrumentType !== 'all' || priceFlag !== '价格不限') {
       ;(async () => {
         const result = await request('/product', {
           product_type: selectedMusicInstrumentType,
-          start_price: 0,
-          end_price: 0
+          start_price: selectedPrice[0],
+          end_price: selectedPrice[1]
         })
         const { status, data } = result
         if (status === 0) {
           setProductList(data.products)
         }
       })()
+    } else {
+      getAllProduct()
     }
-  }, [selectedMusicInstrumentType])
+  }, [getAllProduct, priceFlag, selectedMusicInstrumentType, selectedPrice])
 
   const handleTypeClick = useCallback(type => {
     setSelectedMusicInstrumentType(type)
   }, [])
 
-  const handlePriceClick = useCallback(type => {
-    setSelectedPrice(type)
+  const handlePriceClick = useCallback((value, range) => {
+    setPriceFlag(value)
+    setSelectedPrice(range)
   }, [])
 
   return (
@@ -71,16 +75,16 @@ const Home = () => {
             <div className='type-title'>价格</div>
             {INSTRUMENT_PRICE_TYPE.map(item => (
               <span
-                onClick={() => handlePriceClick(item.value)}
+                onClick={() => handlePriceClick(item.value, item.range)}
                 key={item.id}
-                className={`item ${item.value === selectedPrice ? 'selected' : ''}`}
+                className={`item ${item.value === priceFlag ? 'selected' : ''}`}
               >
                 {item.value}
               </span>
             ))}
           </div>
         </div>
-        <Product list={productList} />
+        {productList.length > 0 ? <Product list={productList} /> : <Empty />}
         <Footer />
         <BackTop className='back-to-top'>top</BackTop>
       </div>

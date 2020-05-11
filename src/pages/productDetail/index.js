@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useCallback, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { Breadcrumb, BackTop, Modal, message } from 'antd'
+import { Breadcrumb, BackTop } from 'antd'
 import Header from '../../components/Header'
 import ProductAction from '../../components/ProductAction'
 import Guarantee from '../../components/Guarantee'
@@ -132,7 +132,6 @@ const ProductDetail = () => {
                 <li className='li'>
                   <ProductAction
                     id={productDetail.product_id}
-                    productNumber={productNumber}
                     className='action'
                   />
                 </li>

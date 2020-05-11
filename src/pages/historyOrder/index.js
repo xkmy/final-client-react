@@ -1,46 +1,36 @@
-import React, { useEffect, useCallback } from 'react'
-import { List, Modal, message } from 'antd'
+import React, { useEffect, useState } from 'react'
+// import { List, Modal, message } from 'antd'
+import { List } from 'antd'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
-import { BASE_IMG_URL } from '../../constants'
+// import { BASE_IMG_URL } from '../../constants'
 import request from '../../api/request'
 import './index.scss'
 
 const HistoryOrder = () => {
+  const [historyOrder, setHistoryOrder] = useState([])
+
   useEffect(() => {
     ;(async () => {
       const result = await request('/order')
       const { status, data } = result
-      if(status===0){
-        console.log(data)
+      if (status === 0) {
+        console.log(data.orders)
+        setHistoryOrder(data.orders)
       }
     })()
   }, [])
 
-  const listData = []
-  for (let i = 0; i < 5; i++) {
-    listData.push({
-      title: '钢琴',
-      description: (
-        <div>
-          <div>订单日期: 2020-4-20</div>
-          <div className='price-wrapper'>订单金额: ¥5500</div>
-        </div>
-      ),
-      content: '欧米勒T1系列立式钢琴儿童家庭学校演奏初学专业钢琴'
-    })
-  }
-
-  const handleReduce = useCallback(() => {
-    Modal.confirm({
-      title: '您确定要删除该订单吗?',
-      cancelText: '取消',
-      okText: '确定',
-      onOk: () => {
-        message.success('删除成功')
-      }
-    })
-  }, [])
+  // const handleReduce = useCallback(() => {
+  //   Modal.confirm({
+  //     title: '您确定要删除该订单吗?',
+  //     cancelText: '取消',
+  //     okText: '确定',
+  //     onOk: () => {
+  //       message.success('删除成功')
+  //     }
+  //   })
+  // }, [])
 
   return (
     <div className='history-order-container'>
@@ -50,28 +40,30 @@ const HistoryOrder = () => {
           className='order-list'
           itemLayout='vertical'
           size='large'
-          dataSource={listData}
+          dataSource={historyOrder}
           renderItem={item => (
             <List.Item
               className='li'
-              key={item.title}
+              key={item.product_name}
               actions={[
-                <span onClick={handleReduce} className='action-item'>
-                  删除订单
-                </span>
+                // <span onClick={handleReduce} className='action-item'>
+                //   删除订单
+                // </span>
               ]}
               extra={
                 <div className='product-img'>
-                  <img
-                    src={BASE_IMG_URL + '/upload/image/20190705/20190705145336_6988.jpg'}
-                    className='img'
-                    alt='product'
-                  />
+                  <img src={item.product_image} className='img' alt='product' />
                 </div>
               }
             >
-              <List.Item.Meta title={item.title} description={item.description} />
-              {item.content}
+              <div className='price-title'>{item.product_name}</div>
+              <div>
+                unit price:<span className='price'>${item.product_price}</span>
+              </div>
+              <div>
+                quantity:<span className='price'>{item.product_num}</span>
+              </div>
+              <div>total price:{item.total_price}</div>
             </List.Item>
           )}
         />

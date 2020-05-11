@@ -26,6 +26,13 @@
       .li {
         padding: 10px;
       }
+      .price-title{
+        font-size: $title-font;
+        margin-bottom: 8px;
+      }
+      .price{
+        color: $price-color;
+      }
     }
   }
 }

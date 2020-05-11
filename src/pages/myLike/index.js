@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
 import { List, Modal, message, BackTop } from 'antd'
 import Header from '../../components/Header'
+import ProductAction from '../../components/ProductAction'
 import Footer from '../../components/Footer'
 import request from '../../api/request'
 // import { BASE_IMG_URL } from '../../constants'
@@ -72,23 +73,6 @@ const MyLike = () => {
             <List.Item
               className='li'
               key={item.product_id}
-              actions={[
-                <span
-                  onClick={() => handleClick('add', item.like_id)}
-                  className='action-item add-cart'
-                >
-                  加入购物车
-                </span>,
-                <span onClick={() => handleClick('buy')} className='action-item buy'>
-                  立即购买
-                </span>,
-                <span
-                  onClick={() => handleClick('cancel', item.like_id)}
-                  className='action-item cancel-like'
-                >
-                  取消收藏
-                </span>
-              ]}
               extra={
                 <div className='product-img'>
                   <img src={item.product_image} className='img' alt='product' />
@@ -96,8 +80,8 @@ const MyLike = () => {
               }
             >
               <List.Item.Meta title={item.product_name} description={item.description} />
-              <div className='price'>单价:${item.product_price}</div>
-              {/* <span></span> */}
+              <div className='price'>unit price:${item.product_price}</div>
+              <ProductAction id={item.product_id} className='action' showLike={false} />
             </List.Item>
           )}
         />

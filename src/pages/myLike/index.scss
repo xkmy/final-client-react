@@ -17,14 +17,15 @@
         text-align: center;
         color: #fbfbfb;
       }
-      .add-cart {
-        background-color: $price-color;
-      }
-      .buy {
-        background-color: $buy-color;
-      }
-      .cancel-like {
-        background-color: $primary-color;
+      .action{
+        display: inline-block;
+        cursor: pointer;
+        width: 80px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        margin-top: 10px;
+        margin-right: 20px;
       }
       .product-img {
         width: 200px;
