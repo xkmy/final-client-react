@@ -36,7 +36,10 @@
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-          margin-bottom: 20px;
+        }
+        .sales {
+          margin: 10px 0 15px 0;
+          color: $primary-color;
         }
       }
     }

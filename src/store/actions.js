@@ -3,16 +3,16 @@ import Cookies from 'js-cookie'
 
 const handleLogin = value => ({
   type: HANDLE_LOGIN,
-  value,
+  value
 })
 
 const handleLogout = () => ({
-  type: HANDLE_LOGOUT,
+  type: HANDLE_LOGOUT
 })
 
-export const login = username => {
+export const login = ({username,role,seller_type}) => {
   return async dispatch => {
-    dispatch(handleLogin({ username, logined: true }))
+    dispatch(handleLogin({ username, role, seller_type, logined: true }))
   }
 }
 

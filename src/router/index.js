@@ -8,6 +8,7 @@ import HistoryOrder from '../pages/historyOrder'
 import MyLike from '../pages/myLike'
 import ConfirmOrder from '../pages/confirmOrder'
 import OrderPay from '../pages/orderPay'
+import AddProduct from '../pages/addProduct'
 import NotFound from '../pages/notFound'
 
 const routes = [
@@ -61,6 +62,11 @@ const routes = [
   {
     path: '/order-pay',
     component: OrderPay,
+    requiresAuth: true
+  },
+  {
+    path: '/add-product',
+    component: AddProduct,
     requiresAuth: true
   },
   {

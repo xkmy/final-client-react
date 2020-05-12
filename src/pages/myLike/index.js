@@ -81,7 +81,7 @@ const MyLike = () => {
             >
               <List.Item.Meta title={item.product_name} description={item.description} />
               <div className='price'>unit price:${item.product_price}</div>
-              <ProductAction id={item.product_id} className='action' showLike={false} />
+              <ProductAction id={item.product_id} className='action' likeId={item.like_id} />
             </List.Item>
           )}
         />

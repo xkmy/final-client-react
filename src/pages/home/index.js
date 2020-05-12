@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import Header from '../../components/Header'
 import Product from '../../components/Product'
@@ -9,6 +10,8 @@ import './index.scss'
 import { Spin } from 'antd'
 
 const Home = () => {
+  const user = useSelector(state => state.user)
+  console.log(user)
   const { push } = useHistory()
   const [productList, setProductList] = useState([])
   const [loading, setLoading] = useState(true)

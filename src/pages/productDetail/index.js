@@ -133,6 +133,7 @@ const ProductDetail = () => {
                   <ProductAction
                     id={productDetail.product_id}
                     className='action'
+                    likeId={productDetail.like_id}
                   />
                 </li>
                 <li className='li pay-wrapper'>

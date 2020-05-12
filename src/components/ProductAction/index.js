@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from 'react'
+import React, { memo, useCallback, useState } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Modal, message } from 'antd'
@@ -7,12 +7,13 @@ import '../../assets/iconfont/iconfont.css'
 import './index.scss'
 
 const ProductAction = props => {
-  const { className, id, showLike = true } = props
+  const { className, id, likeId } = props
   const { push } = useHistory()
   const { pathname } = useLocation()
   const { username } = useSelector(state => state.user)
+  const [likedFlag, setLikedFlag] = useState(likeId ? true : false)
 
-  const handleAdd = useCallback(
+  const handleAction = useCallback(
     async type => {
       if (username) {
         switch (type) {
@@ -37,7 +38,18 @@ const ProductAction = props => {
             const result = await request('/like', { product_id: id }, 'POST')
             const { status } = result
             if (status === 0) {
-              message.success('collection success')
+              setLikedFlag(true)
+              message.success('Collection success')
+            } else {
+              message.info('You have already collected it, you cannot repeat it anymore!')
+            }
+            break
+          case 'cancelLike':
+            const cancelLikeresult = await request('/changeLikeStatus', { product_id: id })
+            const { status: cancelLikeStatus } = cancelLikeresult
+            if (cancelLikeStatus === 0) {
+              message.success('Successful operation')
+              setLikedFlag(false)
             }
             break
           default:
@@ -46,8 +58,8 @@ const ProductAction = props => {
         return
       }
       Modal.info({
-        title: '请您先登录!',
-        okText: '去登陆',
+        title: 'Please login first!',
+        okText: 'Go to log in',
         onOk: () => {
           push('/login', { from: pathname })
         }
@@ -59,23 +71,32 @@ const ProductAction = props => {
   return (
     <div className='action-wrapper'>
       <span
-        onClick={() => handleAdd('buy')}
+        onClick={() => handleAction('buy')}
         className={`buy ${className ? className : 'action-item'} `}
       >
         立即购买
       </span>
       <span
-        onClick={() => handleAdd('cart')}
+        onClick={() => handleAction('cart')}
         className={`add-cart ${className ? className : 'action-item'} `}
       >
         加入购物车
       </span>
-      {showLike ? (
-        <span onClick={() => handleAdd('like')} className='add-like'>
-          <i className='iconfont icon-shoucang' />
-          <span className='like'>加入收藏</span>
+      {!likedFlag ? (
+        <span onClick={() => handleAction('like')} className='add-like'>
+          <i className='iconfont icon-shoucang liked' />
+          <span className='liked'>
+            <span>加入收藏</span>
+          </span>
         </span>
-      ) : null}
+      ) : (
+        <span
+          onClick={() => handleAction('cancelLike')}
+          className={`cancel-like ${className ? className : 'action-item'} `}
+        >
+          取消收藏
+        </span>
+      )}
     </div>
   )
 }

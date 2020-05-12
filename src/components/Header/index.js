@@ -6,16 +6,30 @@ import { logout } from '../../store/actions'
 import './index.scss'
 
 const Header = () => {
-  const { username } = useSelector(state => state.user)
+  const { username, role } = useSelector(state => state.user)
   const dispatch = useDispatch()
 
-  const menuList = [
+  let menuList = [
     { path: '/', name: '首页' },
     { path: '/all-product', name: '商品' },
     { path: '/cart', name: '购物车' },
     { path: '/history-order', name: '历史订单' },
     { path: '/my-like', name: '我的收藏' }
   ]
+
+  if (role === 'seller') {
+    menuList = [
+      { path: '/', name: '首页' },
+      { path: '/all-product', name: '商品' },
+      { path: '/cart', name: '购物车' },
+      { path: '/history-order', name: '历史订单' },
+      { path: '/my-like', name: '我的收藏' },
+      {
+        path: '/add-product',
+        name: '添加商品'
+      }
+    ]
+  }
 
   const menu = (
     <Menu>

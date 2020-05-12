@@ -18,11 +18,17 @@
   .add-like {
     cursor: pointer;
     color: #999;
+    .liked{
+      color: #E46AA3;
+    }
     .like{
       margin-left: 6px;
     }
     &:hover {
-      color: $primary-color;
+      color: #E46AA3;
     }
+  }
+  .cancel-like{
+    color: $weak-color;
   }
 }

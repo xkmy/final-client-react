@@ -2,7 +2,6 @@ import React from 'react'
 import { useLocation, useHistory, Link, Redirect } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Form, Input, Button, Radio, message } from 'antd'
-import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import request from '../../api/request'
 import { login } from '../../store/actions'
 import jwtDecode from 'jwt-decode'
@@ -30,13 +29,14 @@ const Login = () => {
       if (status === 0) {
         const { token } = data
         const decodedToken = jwtDecode(token)
+        console.log(decodedToken)
         if (decodedToken) {
           const userInfo = JSON.parse(decodedToken.sub)
-          const {  username } = userInfo
+          const { username, role, seller_type } = userInfo
           console.log(userInfo)
           Cookies.set('token', token, { expires: 7 })
-          Cookies.set('user', { username, logined: true }, { expires: 7 })
-          dispatch(login(username))
+          Cookies.set('user', { username, role, seller_type, logined: true }, { expires: 7 })
+          dispatch(login({ username, role, seller_type }))
           message.success('登录成功')
           history.replace(pathname)
         }

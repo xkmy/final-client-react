@@ -19,8 +19,8 @@ const Product = props => {
   return (
     <div className='product-container'>
       <ul className='list'>
-        {list.map(item => (
-          <li key={item.product_id} className='item'>
+        {list.map((item, index) => (
+          <li key={item.product_id + index} className='item'>
             <div className='product-img'>
               <img
                 onClick={() => handleGoDetail(item.product_id)}
@@ -31,10 +31,11 @@ const Product = props => {
             </div>
             <div className='intro'>
               <div onClick={() => handleGoDetail(item.product_id)} className='price-intro'>
-                ¥{item.product_price}
+                ${item.product_price}
               </div>
               <div className='intro-title'>{item.product_name}</div>
-              <Action id={item.product_id}/>
+              <div className='sales'>Sales:{item.sale_num}</div>
+              <Action id={item.product_id} likeId={item.like_id} />
             </div>
           </li>
         ))}

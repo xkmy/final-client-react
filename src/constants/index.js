@@ -5,47 +5,47 @@ export const MUSICAL_INSTRUMENT_TYPE = [
   {
     id: 0,
     type: 'all',
-    name: '全部'
+    name: 'all'
   },
   {
     id: 1,
     type: 'piano',
-    name: '钢琴'
+    name: 'piano'
   },
   {
     id: 2,
     type: 'eletric',
-    name: '电声馆'
+    name: 'eletric'
   },
   {
     id: 3,
     type: 'guitar',
-    name: '吉他'
+    name: 'guitar'
   },
   {
     id: 4,
     type: 'pine',
-    name: '管乐'
+    name: 'pine'
   },
   {
     id: 5,
     type: 'violin',
-    name: '弦乐'
+    name: 'violin'
   },
   {
     id: 6,
     type: 'drump',
-    name: '打击乐'
+    name: 'drump'
   },
   {
     id: 7,
     type: 'folk',
-    name: '民乐'
+    name: 'folk'
   },
   {
     id: 8,
     type: 'present',
-    name: '礼品'
+    name: 'present'
   }
 ]
 
