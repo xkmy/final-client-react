@@ -9,6 +9,7 @@ import MyLike from '../pages/myLike'
 import ConfirmOrder from '../pages/confirmOrder'
 import OrderPay from '../pages/orderPay'
 import AddProduct from '../pages/addProduct'
+import OrderReport from '../pages/orderReport'
 import NotFound from '../pages/notFound'
 
 const routes = [
@@ -67,6 +68,11 @@ const routes = [
   {
     path: '/add-product',
     component: AddProduct,
+    requiresAuth: true
+  },
+  {
+    path: '/order-report',
+    component: OrderReport,
     requiresAuth: true
   },
   {

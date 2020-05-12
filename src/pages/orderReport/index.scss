@@ -1,0 +1,13 @@
+@import '../../assets/css/minx.scss';
+@import '../../assets/css/variable.scss';
+
+.order-list-table-container {
+  @include container();
+  margin-top: 40px;
+  .condition {
+    margin-bottom: 20px;
+    .title {
+      margin-right: 12px;
+    }
+  }
+}

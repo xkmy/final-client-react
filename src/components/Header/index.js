@@ -27,6 +27,10 @@ const Header = () => {
       {
         path: '/add-product',
         name: '添加商品'
+      },
+      {
+        path: '/order-report',
+        name: '订单报表'
       }
     ]
   }

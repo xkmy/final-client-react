@@ -17,7 +17,7 @@
     margin: 0 auto;
     .menu {
       @include flex();
-      flex: 0.8;
+      flex: 0.9;
       .menu-item {
         cursor: pointer;
         color: rgba(0, 0, 0, 0.65);
