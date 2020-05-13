@@ -8,25 +8,24 @@
     margin: 20px 0;
   }
   .register-wrapper {
-    @include flex();
+    @include flex($row: center, $align-items: initial);
     @include bg-img('https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg');
     height: 100%;
-    .register-form {
+    .register-type {
+      margin-bottom: 20px;
+    }
+    .form {
       background-color: #fff;
       border: 1px solid #ebebec;
       max-width: 360px;
       width: 360px;
-      margin: 0 auto;
       margin-bottom: 30px;
       padding: 40px 30px 8px 30px;
       background-color: #fff;
-      .register-form-span {
-        @include a();
-      }
       .register-form-button {
         width: 100%;
       }
-      .register {
+      .go-login {
         display: inline-block;
         margin-top: 15px;
       }

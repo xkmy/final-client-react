@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { Table, Tag, Radio } from 'antd'
+import { useSelector } from 'react-redux'
+import { Table, Radio } from 'antd'
 import Header from '../../components/Header'
 import request from '../../api/request'
 import './index.scss'
+import { Redirect } from 'react-router-dom'
 
 const OrderReport = () => {
+  const { role } = useSelector(state => state.user)
   const [reportType, setReportType] = useState('daily')
   const [data, setData] = useState([])
   useEffect(() => {
@@ -31,18 +34,24 @@ const OrderReport = () => {
 
   return (
     <>
-      <Header />
-      <div className='order-list-table-container'>
-        <div className='condition'>
-          <span className='title'> Select date to view</span>
-          <Radio.Group onChange={handleChange}>
-            <Radio value='daily'>daily</Radio>
-            <Radio value='weekly'>weekly</Radio>
-            <Radio value='monthly'>monthly</Radio>
-          </Radio.Group>
-        </div>
-        <Table columns={columns} dataSource={data} rowKey='count' />
-      </div>
+      {role !== 'seller' ? (
+        <Redirect to='/' />
+      ) : (
+        <>
+          <Header />
+          <div className='order-list-table-container'>
+            <div className='condition'>
+              <span className='title'> Select date to view</span>
+              <Radio.Group onChange={handleChange}>
+                <Radio value='daily'>daily</Radio>
+                <Radio value='weekly'>weekly</Radio>
+                <Radio value='monthly'>monthly</Radio>
+              </Radio.Group>
+            </div>
+            <Table columns={columns} dataSource={data} rowKey='count' />
+          </div>
+        </>
+      )}
     </>
   )
 }

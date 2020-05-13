@@ -58,7 +58,7 @@ const Login = () => {
             <Form
               name='login-form'
               layout='vertical'
-              initialValues={{ remember: true }}
+              initialValues={{ identity: 'buyer' }}
               onFinish={onFinish}
             >
               <Form.Item

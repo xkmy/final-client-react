@@ -1,7 +1,7 @@
-@mixin flex($row: space-between, $col: center, $wrap: wrap) {
+@mixin flex($row: space-between, $col: center, $wrap: wrap, $align-items: center) {
   display: flex;
   justify-content: $row;
-  align-items: $col;
+  align-items: $align-items;
   flex-wrap: $wrap;
 }
 @mixin img($width: 100%, $height: 100%) {
