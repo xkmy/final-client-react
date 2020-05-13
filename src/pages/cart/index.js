@@ -34,11 +34,12 @@ const Cart = () => {
         const result = await request('/cart/' + id, null, 'DELETE')
         const { status } = result
         if (status === 0) {
+          getCart()
           message.success('删除成功')
         }
       }
     })
-  }, [])
+  }, [getCart])
 
   const computeSum = (cart, type) => {
     const sum = cart.reduce((pre, cur) => {
