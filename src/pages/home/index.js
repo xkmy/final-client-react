@@ -10,22 +10,34 @@ import './index.scss'
 import { Spin } from 'antd'
 
 const Home = () => {
-  const user = useSelector(state => state.user)
-  console.log(user)
+  const { role } = useSelector(state => state.user)
   const { push } = useHistory()
   const [productList, setProductList] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    ;(async () => {
-      const result = await request('/product')
-      const { status, data } = result
-      setLoading(false)
-      if (status === 0) {
-        setProductList(data.products)
-      }
-    })()
-  }, [])
+    if (role === 'seller') {
+      ;(async () => {
+        const result = await request('/productBySeller')
+        const { status, data } = result
+        setLoading(false)
+        if (status === 0) {
+          console.log(data)
+          setProductList(data.allProduct)
+        }
+      })()
+    }
+    if (role === 'buyer') {
+      ;(async () => {
+        const result = await request('/product')
+        const { status, data } = result
+        setLoading(false)
+        if (status === 0) {
+          setProductList(data.products)
+        }
+      })()
+    }
+  }, [role])
 
   const handleLookMore = useCallback(() => {
     push('/all-product')

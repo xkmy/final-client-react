@@ -1,5 +1,6 @@
 import React, { memo, useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import Action from '../../components/ProductAction'
 // import { BASE_IMG_URL } from '../../constants'
 import '../../assets/iconfont/iconfont.css'
@@ -8,6 +9,7 @@ import './index.scss'
 const Product = props => {
   const { list } = props
   const { push } = useHistory()
+  const { role } = useSelector(state => state.user)
 
   const handleGoDetail = useCallback(
     id => {
@@ -35,7 +37,7 @@ const Product = props => {
               </div>
               <div className='intro-title'>{item.product_name}</div>
               <div className='sales'>Sales:{item.sale_num}</div>
-              <Action id={item.product_id} likeId={item.like_id} />
+              {role === 'buyer' ? <Action id={item.product_id} likeId={item.like_id} /> : null}
             </div>
           </li>
         ))}

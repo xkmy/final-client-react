@@ -16,6 +16,7 @@ const AddProduct = () => {
     const { status } = result
     if (status === 0) {
       message.success('Added successfully')
+      form.resetFields()
     } else {
       message.error('add failed')
     }
