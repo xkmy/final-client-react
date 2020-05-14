@@ -78,11 +78,6 @@ const ProductDetail = () => {
 
   const handleAddToCart = useCallback(async => {
     setProductNumber(productNumber => productNumber + 1)
-    // const result = await request('/cart', { product_id: id }, 'POST')
-    // const { status } = result
-    // if (status === 0) {
-    //   setProductNumber(productNumber => productNumber + 1)
-    // }
   }, [])
 
   return (
@@ -139,10 +134,6 @@ const ProductDetail = () => {
                 <li className='li pay-wrapper'>
                   <span>支付方式:</span>
                   <div className='pay'>
-                    <span className='pay-method'>
-                      <img className='pay-img' src={productDetail.product_image} alt='支付宝' />
-                      支付宝
-                    </span>
                     <span className='pay-method'>
                       <img
                         className='pay-img'
