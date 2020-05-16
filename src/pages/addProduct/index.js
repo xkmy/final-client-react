@@ -15,7 +15,7 @@ const AddProduct = () => {
     const result = await request('/product', values, 'POST')
     const { status } = result
     if (status === 0) {
-      message.success('Added successfully')
+      message.success('Added successfully,Please wait for review!')
       form.resetFields()
     } else {
       message.error('add failed')

@@ -10,6 +10,7 @@ import ConfirmOrder from '../pages/confirmOrder'
 import OrderPay from '../pages/orderPay'
 import AddProduct from '../pages/addProduct'
 import OrderReport from '../pages/orderReport'
+import Check from '../pages/check'
 import NotFound from '../pages/notFound'
 
 const routes = [
@@ -73,6 +74,11 @@ const routes = [
   {
     path: '/order-report',
     component: OrderReport,
+    requiresAuth: true
+  },
+  {
+    path: '/check',
+    component: Check,
     requiresAuth: true
   },
   {

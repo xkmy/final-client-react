@@ -20,7 +20,6 @@ const Header = () => {
   if (role === 'seller') {
     menuList = [
       { path: '/', name: '首页' },
-      // { path: '/all-product', name: '商品' },
       {
         path: '/add-product',
         name: '添加商品'
@@ -30,6 +29,10 @@ const Header = () => {
         name: '订单报表'
       }
     ]
+  }
+
+  if (role === 'employee') {
+    menuList = [{ path: '/check', name: '审核商品' }]
   }
 
   const menu = (

@@ -34,11 +34,11 @@ const Login = () => {
           const userInfo = JSON.parse(decodedToken.sub)
           const { username, role, seller_type } = userInfo
           console.log(userInfo)
+          dispatch(login({ username, role, seller_type }))
           Cookies.set('token', token, { expires: 7 })
           Cookies.set('user', { username, role, seller_type, logined: true }, { expires: 7 })
-          dispatch(login({ username, role, seller_type }))
           message.success('登录成功')
-          history.replace(pathname)
+          role === 'employee' ? history.replace('/check') : history.replace(pathname)
         }
       } else {
         message.error('登录失败,用户不存在或账号密码错误')

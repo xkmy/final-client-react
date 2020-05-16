@@ -36,6 +36,7 @@ const Register = () => {
 
   const sellerOnFinish = useCallback(
     async values => {
+      values.seller_type = 2
       try {
         const result = await request('/seller', values, 'POST')
         const { status } = result
@@ -186,7 +187,7 @@ const Register = () => {
               >
                 <Input type='password' placeholder='Please enter the password' />
               </Form.Item>
-              <Form.Item
+              {/* <Form.Item
                 name='seller_type'
                 label='Seller Type'
                 rules={[{ required: true, message: 'Please enter the Seller type' }]}
@@ -195,7 +196,7 @@ const Register = () => {
                   <Radio value={1}>seller1</Radio>
                   <Radio value={1}>seller2</Radio>
                 </Radio.Group>
-              </Form.Item>
+              </Form.Item> */}
               <Form.Item
                 name='seller_tel'
                 label={`seller's phone number`}

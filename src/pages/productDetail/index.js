@@ -137,8 +137,16 @@ const ProductDetail = () => {
                     <span className='pay-method'>
                       <img
                         className='pay-img'
+                        src={BASE_IMG_URL + 'images/_r2_c2.jpg'}
+                        alt=''
+                      />
+                      支付宝
+                    </span>
+                    <span className='pay-method'>
+                      <img
+                        className='pay-img'
                         src={BASE_IMG_URL + '/images/_r2_c4.jpg'}
-                        alt='支付宝'
+                        alt='微信'
                       />
                       微信
                     </span>

@@ -1,0 +1,32 @@
+@import '../../assets/css/minx.scss';
+@import '../../assets/css/variable.scss';
+
+.check-container {
+  .container {
+    @include container();
+    .table {
+      margin-top: 30px;
+      .check-status {
+        cursor: pointer;
+        .good {
+          color: #00cc00;
+        }
+      }
+      .product-img {
+        width: 60px;
+        // height: 60px;
+        // object-fit: contain;
+
+        .img {
+          @include img();
+        }
+      }
+      .approved {
+        @include a();
+      }
+      .not-approved {
+        cursor: pointer;
+      }
+    }
+  }
+}
