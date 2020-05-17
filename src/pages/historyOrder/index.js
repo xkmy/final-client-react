@@ -41,10 +41,10 @@ const HistoryOrder = () => {
           itemLayout='vertical'
           size='large'
           dataSource={historyOrder}
-          renderItem={item => (
+          renderItem={(item,index) => (
             <List.Item
               className='li'
-              key={item.product_name}
+              key={item.product_name || index}
               actions={[
                 // <span onClick={handleReduce} className='action-item'>
                 //   删除订单
